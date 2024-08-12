@@ -1,5 +1,6 @@
+
 # Simple-CRUD-Functionality-SQLi-POC - CVE-2023-48078
-+ Exploit Author: esasadam06
++ Exploit Author: Hüseyin KAVUNCU
 # Vendor Homepage
 + https://code-projects.org/simple-crud-functionality-in-php-with-source-code
 # Software Link
